@@ -1,8 +1,6 @@
 package exercise.ex21
 
-object Fibonacci {
-  def main(args: Array[String]): Unit = println(fib(10))
-
+object Fibonacci extends App {
   def fib(n: Int): Int = {
     @annotation.tailrec
     def loop(n: Int, before: Int, current: Int): Int = {
@@ -10,7 +8,9 @@ object Fibonacci {
       else loop(n - 1, current, before + current)
     }
 
-    if (n <= 0) throw new Exception("")
+    if (n <= 0)
+      throw new IllegalArgumentException(
+        "value must be greater than or equal to 1")
     else loop(n, 0, 1)
   }
 }

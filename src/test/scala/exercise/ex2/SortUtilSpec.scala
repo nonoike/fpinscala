@@ -1,4 +1,4 @@
-package exercise.ex22
+package exercise.ex2
 
 import org.scalatest.FlatSpec
 

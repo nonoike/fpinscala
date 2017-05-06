@@ -1,4 +1,4 @@
-package exercise.ex21
+package exercise.ex2
 
 object Fibonacci extends App {
   def fib(n: Int): Int = {

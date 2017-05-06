@@ -1,4 +1,4 @@
-package chapter.gettingstarted
+package fpinscala.gettingstarted
 
 object MyModule {
   def main(args: Array[String]): Unit = {

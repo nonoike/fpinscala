@@ -16,6 +16,15 @@ object List {
     case Cons(x, xs) => x * product(xs)
   }
 
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+  }
+
+  def sum2(ns: List[Int]) = foldRight(ns, 0)((x, y) => x + y)
+
+  def product2(ns: List[Double]) = foldRight(ns, 1.0)(_ * _)
+
   def tail[A](as: List[A]): List[A] = as match {
     case Nil => throw new IllegalArgumentException("list must not be empty")
     case Cons(_, as) => as
@@ -51,12 +60,30 @@ object List {
   }
    */
 
+  /*
   // Answer Example
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] =
-    l match {
-      case Cons(h, t) if f(h) => dropWhile(t, f)
-      case _ => l
-    }
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Cons(h, t) if f(h) => dropWhile(t, f)
+    case _ => l
+  }
+   */
+  def dropWhile[A](as: List[A])(f: A => Boolean): List[A] = as match {
+    case Cons(h, t) if f(h) => dropWhile(t)(f)
+    case _ => as
+  }
+
+  def append[A](a1: List[A], a2: List[A]): List[A] = a1 match {
+    case Nil => a2
+    case Cons(h, t) => Cons(h, append(t, a2))
+  }
+
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(_, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
+  }
+
+  def length[A](as: List[A]): Int = foldRight(as, 0)((_, y) => y + 1)
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

@@ -24,6 +24,7 @@ class ListSpec extends FlatSpec {
     assert(List.drop(List(1, 2, 3, 4), 5) === Nil)
   }
 
+  /*
   "dropWhile" should "Nilと1を渡すとNilを返す" in {
     assert(List.dropWhile(Nil, (a: Int) => a == a) === Nil)
   }
@@ -38,5 +39,22 @@ class ListSpec extends FlatSpec {
 
   it should "List{1,2,3,4}と(a == 5)を渡すとList{1, 2, 3, 4}を返す" in {
     assert(List.dropWhile(List(1, 2, 3, 4), (a: Int) => a == 5) === List(1, 2, 3, 4))
+  }
+   */
+
+  "dropWhile" should "Nilと1を渡すとNilを返す" in {
+    assert(List.dropWhile(Nil)(a => a == a) === Nil)
+  }
+
+  it should "List{1,1,2,3}と(a == 1)を渡すとList{2, 3}を返す" in {
+    assert(List.dropWhile(List(1, 1, 2, 3))(a => a == 1) === List(2, 3))
+  }
+
+  it should "List{1,1,1,1}と(a == 1)を渡すとNilを返す" in {
+    assert(List.dropWhile(List(1, 1, 1, 1))(a => a == 1) === Nil)
+  }
+
+  it should "List{1,2,3,4}と(a == 5)を渡すとList{1, 2, 3, 4}を返す" in {
+    assert(List.dropWhile(List(1, 2, 3, 4))(a => a == 5) === List(1, 2, 3, 4))
   }
 }

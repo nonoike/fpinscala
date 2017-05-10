@@ -25,6 +25,18 @@ object List {
 
   def product2(ns: List[Double]) = foldRight(ns, 1.0)(_ * _)
 
+  @annotation.tailrec
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+  }
+
+  def sum3(ns: List[Int]): Int = foldLeft(ns, 0)(_ + _)
+
+  def product3(ns: List[Double]) = foldLeft(ns, 1.0)(_ * _)
+
+  def length2[A](ns: List[A]) = foldLeft(ns, 0)((acc, _) => acc + 1)
+
   def tail[A](as: List[A]): List[A] = as match {
     case Nil => throw new IllegalArgumentException("list must not be empty")
     case Cons(_, as) => as
